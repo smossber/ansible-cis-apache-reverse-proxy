@@ -1,0 +1,14 @@
+---
+- name: ensure restrictive Options for OS root dir
+  debug:
+    msg: TBD, ensure there is a <Directory /> Options None </Directory> 
+
+- name: restrict Options for Web Root Directory
+  
+  # Copy in template welcome.conf
+  # this needs to be in place otherwise it will be overwritten
+  # in future updates. 
+- name: 5.4 ensure Default HTML content is removed
+  template: 
+
+- name: 5.4 

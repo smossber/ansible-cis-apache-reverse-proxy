@@ -1,0 +1,35 @@
+---
+# tasks file for ansible-cis-apache-2.4
+
+- include: section_1.yaml
+  tags: section_1, installation
+
+- include: section_2.yaml
+  tags: section_2, minimize_modules
+
+- include: section_3.yaml
+  tags: section_3, principles, permissions, ownership
+
+- include: section_4.yaml
+  tags: acl
+
+- include: section_5.yaml
+  tags: minimize_features
+
+- include: section_6.yaml
+  tags: logging, monitoring
+
+- include: section_7.yaml
+  tags: ssl
+- include: section_8.yaml
+  tags: leakage
+
+- include: section_9.yaml
+  tags: dos
+
+- include: section_10.yaml
+  tags: request_limits
+
+- include: section_11.yaml
+  tags: mac, selinux
+

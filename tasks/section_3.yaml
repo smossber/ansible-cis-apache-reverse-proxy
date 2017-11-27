@@ -1,0 +1,55 @@
+---
+
+- name: 3.1 ensure apache web server run as non-root user
+  lineinfile: 
+    path: /etc/httpd/conf/httpd.conf
+    regexp: '^User '
+    line: 'User apache'
+  
+- name: 3.1 ensure apache web server run as non-root user
+  lineinfile: 
+    path: /etc/httpd/conf/httpd.conf
+    regexp: '^Group '
+    line: 'Group apache'
+
+- name: 3.2 ensure apache user has an invalid shell (nologin)
+  user:
+    name: apache
+    shell: nologin
+
+# User module doesn't support locking
+# using command instead
+- name: 3.3 ensure apache user is locked
+  command: passwd -l apache 
+
+- name: 3.4-3.5 ensure apache directories are owned by root
+  command: "chown -R root:root {{ apache_path }}"
+
+- name: 3.6 restrict write access on apache directories and files
+  command: "chmod -R o-w {{ apache_path }}" 
+
+- name: 3.7 ensure secure core dump directory is /var/log/httpd/
+  lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: '^ CoreDumpDirectory'
+
+- name: 3.8 ensure the lock file is secure
+  debug: 
+    msg: TBD
+
+- name: 3.9 ensure pid file is secured
+  debug:
+    msg: TBD 
+
+- name: 3.10 ensure secure board file is not within apache DocumentRoot
+
+- name: 3.10 ensure SecureBoard file is non writable
+  debug:
+    msg: TBD, check if present, if so take action
+
+- name: 3.11 Restrict Group Write access for the Apache directories and Files
+  command: "chmod -R g-w {{ apache_path }}"
+
+- name: 3.12 Restrict Group Write Access for the Document Root Directories and Files
+  command: "find -L {{ apache_path }} -group apache -perm /g=w -print | xargs chmod g-w"
+
